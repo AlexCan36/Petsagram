@@ -1,3 +1,46 @@
 {{!-- main page - when you first open our site you should see this --}}
 
-{{!-- Says WELCOME, offers option to log in or sign up. If you try to navigate to other pages it navigates back to here with a little error message saying "please log in first" --}}
+{{!-- Says WELCOME, offers option to log in or sign up. If you try to navigate to other pages it navigates back to here
+with a little error message saying "please log in first" --}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petsagram</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>
+                {{#if loggedIn}}
+                Welcome {{user.username}}!
+                {{else}}
+                Welcome to Petsagram!
+                {{/if}}
+            </h1>
+            <nav>
+                {{#if loggedIn}}
+                <a href="/profile"></a>
+                <a href="/feed">feed</a>
+                <a href="/logout">Logout</a>
+                {{else}}
+                <a href="/login">Login</a>
+                <a href="/signup">Sign Up</a>
+                {{/if}}
+            </nav>
+        </header>
+        <main>
+            {{{body}}}
+        </main>
+        <footer>
+            Thanks for visiting!
+            {{!-- list our names or GitHubs here maybe --}}
+        </footer>
+    </div>
+</body>
+
+</html>
