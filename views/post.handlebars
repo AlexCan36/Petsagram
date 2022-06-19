@@ -1,36 +1,28 @@
-{{!-- shows individual post if clicked on. This shows the likes and comments on this post as well as who liked, commented, and posted. --}}
 {{!-- Post --}}
+{{#each posts}}
 <article class="post">
     <div class="picture">
-        <img src="{{post.image}}">
+        <img src={{this.image}}>
     </div>
     <div class="likes-and-comments">
-        {{post.like_count}} like(s) and {{post.comment_count}}
-        {{!-- could also do something like post.comments.length --}}
+        {{this.like_count}} like(s) and {{this.comments.length}}
     </div>
     <div class="caption">
-        <p class="post-user">{{post.user}}</p>
-        <p class="post-caption">{{post.caption}}</p>
+        <p class="post-user">{{this.user}}</p>
+        <p class="post-caption">{{this.caption}}</p>
     </div>
 </article>
+{{/each}}
 
-{{!-- form and comments
-{{#if loggedIn}}
 <form class="comment-form">
   <div>
     <textarea name="comment-body"></textarea>
   </div>
 
   <div>
-    <button type="submit">add comment</button>
-    <button type="button" class="upvote-btn">upvote</button>
+    <button type="submit">Comment</button>
+    <button type="button" class="like-btn">Like</button>
   </div>
 </form>
-{{/if}}
 
 {{> comments post.comments}}
-
-{{#if loggedIn}}
-<script src="/javascript/comment.js"></script>
-<script src="/javascript/upvote.js"></script>
-{{/if}} --}}
