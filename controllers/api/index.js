@@ -3,8 +3,7 @@ const petImgRoutes = require('./petImgRoutes');
 const userRoutes = require('./userRoutes');
 
 
-router.use('', petImgRoutes)
-router.use('', userRoutes)
-router.use('', )
+router.use('/petimg', petImgRoutes)
+router.use('/users', userRoutes)
 
 module.exports = router;
