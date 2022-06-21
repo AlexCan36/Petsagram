@@ -1,27 +1,14 @@
-{{#each posts}}
-<article class="post">
-    <div class="picture">
-        <img src={{this.image}}>
-    </div>
-    <div class="likes-and-comments">
-        {{this.like_count}} like(s) and {{this.comments.length}}
-    </div>
-    <div class="caption">
-        <p class="post-user">{{this.user}}</p>
-        <p class="post-caption">{{this.caption}}</p>
-    </div>
-</article>
-{{/each}}
-
-<form class="comment-form">
-  <div>
-    <textarea name="comment-body"></textarea>
-  </div>
-
-  <div>
-    <button type="submit">Comment</button>
-    <button type="button" class="like-btn">Like</button>
-  </div>
-</form>
-
-{{> comments post.comments}}
+{{!-- If there are posts already made, then it displays those posts --}}
+{{#if posts.length}}
+<section>
+  <ol>
+    {{#each posts as |post|}}
+    <li>
+      {{> inner-post post}}
+    </li>
+    {{/each}}
+  </ol>
+</section>
+{{else}}
+<h1>No Posts Yet!</h1>
+{{/if}}

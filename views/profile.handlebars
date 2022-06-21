@@ -1,6 +1,6 @@
 {{!-- profile pic --}}
 <div class="profile-pic">
-<img src="{{this.user.profilePicture}}">
+<img src={{this.user.profilePicture}}>
 </div>
 
 {{!-- username --}}
@@ -13,9 +13,17 @@
 <a href="/newpost">New Post</a>
 </div>
 
-{{#each posts}}
-{{!-- Posts --}}
-<div>
-
-</div>
-{{/each}}
+{{!-- List of the user's posts --}}
+{{#if posts.length}}
+<section>
+  <ol>
+    {{#each this.user.posts as |post|}}
+    <li>
+      {{> inner-post post}}
+    </li>
+    {{/each}}
+  </ol>
+</section>
+{{else}}
+<h1>No Posts Yet!</h1>
+{{/if}}
