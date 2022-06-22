@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petsagram</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>
+                {{#if loggedIn}}
+                Welcome {{this.user.username}}!
+                {{else}}
+                Welcome to Petsagram!
+                {{/if}}
+            </h1>
+            <nav>
+                {{#if loggedIn}}
+                <a href="/profile"></a>
+                <a href="/feed">feed</a>
+                <a href="/logout">Logout</a>
+                {{else}}
+                <a href="/login">Login</a>
+                <a href="/signup">Sign Up</a>
+                {{/if}}
+            </nav>
+        </header>
+        <main>
+            {{{body}}}
+        </main>
+        <footer>
+            {{!-- list our names or GitHubs here maybe --}}
+        </footer>
+    </div>
+</body>
+
+</html>

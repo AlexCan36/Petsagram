@@ -1,0 +1,17 @@
+{{!-- Post inner body, make sure to use {{#each}} and {{/each around this is you are using it to generate lots of posts somewhere}} --}}
+
+<article class="post">
+    <div class="post-image">
+        <img src={{this.image}}>
+    </div>
+    <div class="post-counts">
+        {{this.like_count}} like(s) and {{this.comments_count}}
+    </div>
+    <div class="post-caption">
+        <p class="post-user">{{this.user}}</p>
+        <p class="post-caption">{{this.caption}}</p>
+    </div>        
+    <nav class="post-comments">
+    <a href="/comments/{{post.id}}">View Comments</a>
+    </nav>
+</article>
