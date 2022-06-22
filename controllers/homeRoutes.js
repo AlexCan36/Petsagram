@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+// FRONT END
 // Homepage route
 router.get('/', (req, res) => {
     // handlebars
@@ -16,4 +17,5 @@ router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
+// all handlebars pages
 module.exports = router;

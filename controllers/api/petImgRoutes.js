@@ -5,10 +5,14 @@ const {} = require('../../models');
 router.get('/', async (req,res) =>{})
 
 // creating pet img
-router.post('/', async (req,res) =>{})
+router.post('/', async (req,res) =>{
+    // post id
+})
 
 // updating pet img
 router.put('/', async (req,res) =>{})
 
-// delete pet img
+// delete pet img, caption, comment, likes
 router.delete('/', async (req,res) =>{})
+
+
