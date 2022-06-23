@@ -1,0 +1,54 @@
+/* Styles for the main handlebars page */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.main-header {
+    padding: 30px 50px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-image: url("https://thumbs.dreamstime.com/b/happy-dog-banner-copy-space-web-banner-happy-cute-jack-russell-terrier-puppy-pet-dog-125508754.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-position: center;
+    z-index: 9999;
+}
+
+.welcome-header {
+    margin: 0;
+    font-style: bold;
+    color: rgb(198, 214, 198);
+    font-size: xx-large;
+}
+
+.nav-header {
+    margin: 7px 0;
+}
+
+.nav-header ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+}
+
+.nav-header ul li a {
+    padding: 10px 15px;
+    color: rgb(198, 214, 198);
+    font-size: x-large;
+}
+
+.nav-header ul li a:hover {
+    border-radius: 15px;
+    text-shadow: none;
+    background: rgb(64, 95, 64);
+}
