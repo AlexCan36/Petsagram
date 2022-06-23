@@ -1,6 +1,9 @@
-{{!-- prompts the user for a username and password...if recognized it lets them log in using the log in button, starting a session--}}
+{{!-- prompts the user for a username and password...if recognized it lets them log in using the log in button, starting
+a session--}}
 
-<form class="login-form">
+<link rel="stylesheet" href="/assets/css/loginsignup.css">
+
+<form class="form" id="login-form">
   <div>
     <label for="username-login">Username:</label>
     <input type="text" id="username-login" />
@@ -10,6 +13,6 @@
     <input type="password" id="password-login" />
   </div>
   <div>
-    <button type="submit">login</button>
+    <input type="submit">login</input>
   </div>
 </form>
