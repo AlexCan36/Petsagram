@@ -1,6 +1,8 @@
 const  router  = require("express").Router();
 const {} = require('../../models');
 
+
+// Display all comments for a post
 router.get('/:id/comments',function(req,res){
     Comment.findAll({
         where: {
@@ -28,6 +30,8 @@ router.get('/:id/comments',function(req,res){
           });
         });
 
+
+// Make a new comment on a post
 router.post('/comment', async (req, res) => {
     try {
       const dbUserData = await Comment.create({
@@ -46,6 +50,25 @@ router.post('/comment', async (req, res) => {
       res.status(500).json(err);
     }
   });
+
+  // Add a like to a post
+  router.post('/like', async (req, res) => {
+    try {
+      const dbUserData = await Like.create({
+
+      });
+  
+      req.session.save(() => {
+        req.session.loggedIn = true;
+  
+        res.status(200).json(dbUserData);
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  });
+
 
 
 module.exports = router;

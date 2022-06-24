@@ -7,22 +7,18 @@ router.get('/', (req, res) => {
     res.render('welcome');
 });
 
-// alex makes get route to /feed that finds all posts and creates a 'posts' constant
+router.get('/feed', (req, res) => {
+    // handlebars
+    const post = {
+        image: 'https://image.shutterstock.com/image-photo/american-staffordshire-terrier-puppies-sitting-260nw-1048123303.jpg',
+        like_count: '7',
+        comments_count: '9',
+        user: 'Tess',
+        caption: "Caption",
+    }
 
-
-// This is Tess' fake data route for testing
-// router.get('/feed', (req, res) => {
-//     // handlebars
-//     const post = {
-//         image: 'google.com',
-//         like_count: '7',
-//         comments_count: '9',
-//         user: 'Tess',
-//         caption: "Caption",
-//     }
-
-//     res.render('feed', { posts: new Array(4).fill(post) });
-// });
+    res.render('feed', { posts: new Array(4).fill(post) });
+});
 
 // Log in routes to handlebars
 router.get('/login', (req, res) => {
@@ -34,9 +30,14 @@ router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-// profile routes
+// profile route
 router.get('/profile', (req, res) => {
     res.render('profile');
+});
+
+// new post route
+router.get('/newpost', (req, res) => {
+    res.render('newpost');
 });
 
 // all handlebars pages
