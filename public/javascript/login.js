@@ -26,5 +26,3 @@ async function loginSubmit(event) {
 };
 
 loginForm && loginForm.addEventListener('submit', loginSubmit);
-
-console.log(loginForm);

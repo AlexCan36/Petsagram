@@ -12,6 +12,10 @@
         <p class="post-caption">{{this.caption}}</p>
     </div>        
     <nav class="post-comments">
-    <a href="/comments/{{post.id}}">View Comments</a>
+    <a href="/{{this.id}}/comments">View Comments</a>
     </nav>
+    <form class="comment-form">
+            <label for="comment-box">Leave a Comment</label>
+    <input type="text" placeholder="Comment here..." id="comment-box" />
+    </form>
 </article>
