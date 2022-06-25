@@ -37,7 +37,7 @@ router.post('/comment', async (req, res) => {
       const dbUserData = await Comment.create({
         comment_text: req.body.comment_text,
         user_id: req.session.user,
-        // post_id: {{this.id}},
+        post_id: req.body.post_id,
       });
   
       req.session.save(() => {
@@ -55,7 +55,7 @@ router.post('/comment', async (req, res) => {
   router.post('/like', async (req, res) => {
     try {
       const dbUserData = await Like.create({
-
+        post_id: req.body.post_id
       });
   
       req.session.save(() => {

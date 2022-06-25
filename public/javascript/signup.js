@@ -28,6 +28,3 @@ async function signupSubmit(event) {
 };
 
 signupForm && signupForm.addEventListener('submit', signupSubmit);
-
-
-console.log(signupForm);

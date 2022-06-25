@@ -5,13 +5,13 @@
 
 {{!-- username --}}
 <div class="profile-username">
-    <h1>{{this.user.username}}</h1>
+    <h1>{{this.username}}</h1>
 </div>
 
 {{!-- new post option --}}
 <div>
-<a href="/newpost">New Post</a>
-</div>
+      <input class="button new-post" type="submit" value="Create A New Post"></input>
+    </div>
 
 {{!-- List of the user's posts --}}
 {{#if posts.length}}
