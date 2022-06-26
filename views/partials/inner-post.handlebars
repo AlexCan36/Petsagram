@@ -1,17 +1,39 @@
-{{!-- Post inner body, make sure to use {{#each}} and {{/each around this is you are using it to generate lots of posts somewhere}} --}}
+{{!-- Post inner body, make sure to use {{#each}} and {{/each around this is you are using it to generate lots of posts
+somewhere}} --}}
 
-<article class="post">
-    <div class="post-image">
-        <img src={{this.image}}>
+<link rel="stylesheet" href="/assets/css/post.css">
+
+<div class="container">
+    <div class="row">
+        <div class="post-image col">
+            <img src={{this.image}}>
+        </div>
+        <div class="post-data col">
+            <div class="post-username">
+                <h3 class="post-user">Posted by: {{this.user}}</h3>
+            </div>
+            <div class="add">
+                <input class="button" data={{this.id}} id="add-like" type="submit" value="Like"></input>
+            </div>
+            <div class="post-counts">
+                {{this.like_count}} like(s) and {{this.comments_count}} comment(s)
+            </div>
+            <div class="post-caption">
+                <p class="post-caption">{{this.caption}}</p>
+            </div>
+            {{#if req.session.user.id === this.user_id}}
+            {{/if}}
+            <form class="comment-form">
+                <div>
+                    <input type="text" class="textbox" data={{this.id}} placeholder="Leave a comment here..." id="comment-box" />
+                </div>
+                <div class="comment-button">
+                    <input class="button" type="submit" value="Comment"></input>
+                </div>
+                <nav class="view-comments">
+                    <input class="button" data={{this.id}} id="viewComment" value="View Comments"></input>
+                </nav>
+            </form>
+        </div>
     </div>
-    <div class="post-counts">
-        {{this.like_count}} like(s) and {{this.comments_count}}
-    </div>
-    <div class="post-caption">
-        <p class="post-user">{{this.user}}</p>
-        <p class="post-caption">{{this.caption}}</p>
-    </div>        
-    <nav class="post-comments">
-    <a href="/comments/{{post.id}}">View Comments</a>
-    </nav>
-</article>
+</div>

@@ -38,8 +38,6 @@ router.delete("/api/images", (req, res) => {
   });
 });
 
-//destroy the old one and re-create
-
 router.put("/api/images", (req, res) => {
   // delete
   cloudinary.v2.uploader.destroy(public_id, options, function (error, result) {

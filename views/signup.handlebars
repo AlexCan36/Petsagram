@@ -1,18 +1,27 @@
 {{!-- Lets a user sign up, encrypts and saves the password. --}}
-<form class="signup-form">
-  <div>
-    <label for="username-signup">Username:</label>
-    <input type="text" id="username-signup" />
+
+<link rel="stylesheet" href="/assets/css/loginsignup.css">
+
+<div class="form">
+  <div class="form-header">
+    <h1>If you don't already have an account</h1>
+    <h1>sign up here</h1>
   </div>
-  <div>
-    <label for="email-signup">Email:</label>
-    <input type="email" id="email-signup" />
-  </div>
-  <div>
-    <label for="password-signup">Password:</label>
-    <input type="password" id="password-signup" />
-  </div>
-  <div>
-    <button type="submit">Sign Up</button>
-  </div>
-</form>
+  <form id="signup-form">
+    <div>
+      <label for="username-signup">Username:</label>
+      <input class="textbox" type="text" id="username-signup" />
+    </div>
+    <div>
+      <label for="email-signup">Email:</label>
+      <input class="textbox" type="email" id="email-signup" />
+    </div>
+    <div>
+      <label for="password-signup">Password:</label>
+      <input class="textbox" type="password" id="password-signup" />
+    </div>
+    <div>
+      <input class="button" type="submit" value="Sign Up"></input>
+    </div>
+  </form>
+</div>

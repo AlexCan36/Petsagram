@@ -5,28 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petsagram</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/welcome.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 
 <body>
     <div class="wrapper">
-        <header>
-            <h1>
+        <header class="main-header">
+            <h1 class="welcome-header">
                 {{#if loggedIn}}
                 Welcome {{this.user.username}}!
                 {{else}}
                 Welcome to Petsagram!
                 {{/if}}
             </h1>
-            <nav>
-                {{#if loggedIn}}
-                <a href="/profile"></a>
-                <a href="/feed">feed</a>
-                <a href="/logout">Logout</a>
-                {{else}}
-                <a href="/login">Login</a>
-                <a href="/signup">Sign Up</a>
-                {{/if}}
+            <nav class="nav-header">
+                <ul>
+                    {{#if loggedIn}}
+                    <li>
+                        <a href="/profile">Profile</a>
+                    </li>
+                    <li>
+                        <a href="/feed">Feed</a>
+                    </li>
+                    <li>
+                        <a href="/logout">Logout</a>
+                    </li>
+                    {{else}}
+                    <li>
+                        <a href="/login">Login</a>
+                    </li>
+                    <li>
+                        <a href="/signup">Sign Up</a>
+                    </li>
+                    {{/if}}
+                </ul>
             </nav>
         </header>
         <main>
@@ -36,6 +50,9 @@
             {{!-- list our names or GitHubs here maybe --}}
         </footer>
     </div>
+    <script src="/javascript/login.js"></script>
+    <script src="/javascript/signup.js"></script>
+    <script src="/javascript/post.js"></script>
 </body>
 
 </html>
