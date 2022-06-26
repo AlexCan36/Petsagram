@@ -40,3 +40,13 @@ async function viewComments(event) {
 };
 
 viewCommentButton.addEventListener('click', viewComments);
+
+// Edit a Post
+const editButton = document.querySelector('#edit');
+
+async function editPost(event) {
+  event.preventDefault();  
+  // load in the post in a new page and let you edit stuff?
+};
+
+editButton.addEventListener('click', editPost);

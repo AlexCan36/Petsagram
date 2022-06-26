@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const withAuth = require('../utils/auth');
+const { Post, User, Like, Comment } = require('../models');
+const sequelize = require('../config/connection');
 
 // FRONT END
 
@@ -12,9 +14,6 @@ router.get('/', (req, res) => {
 // renders the feed
 router.get('/feed', (req, res) => {
     Post.findAll({
-        where: {
-            id: req.params.id
-        },
         attributes: [
             'id',
             'image',
@@ -51,9 +50,52 @@ router.get('/feed', (req, res) => {
             console.log(err);
             res.status(500).json(err);
         });
-    });
-  
+});
 
+
+// renders the profile
+router.get('/profile', (req, res) => {
+    Post.findAll({
+        where: {
+            user_id: req.session.user_id
+        },
+        attributes: [
+            'id',
+            'image',
+            'caption',
+            'created_at',
+            [sequelize.literal('(SELECT COUNT(*) FROM like WHERE post.id = Like.post_id)'), 'like_count']
+            [sequelize.literal('(SELECT COUNT(*) FROM comment WHERE post.id = Comment.post_id)'), 'comment_count']
+        ],
+        include: [
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
+    })
+        // handlebars
+        .then(dbPostData => {
+            const posts = dbPostData.map(post => post.get({ plain: true }));
+
+            res.render('profile', withAuth, {
+                posts,
+                loggedIn: req.session.loggedIn
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
 
 
 // router.get('/feed', (req, res) => {
@@ -120,10 +162,10 @@ router.get('/single-post', (req, res) => {
 
 // Sign up routes
 router.get('/signup', (req, res) => {
-    if (req.session.loggedIn) {
-        res.redirect('/');
-        return;
-    }
+    // if (req.session.loggedIn) {
+    //     res.redirect('/');
+    //     return;
+    // }
     res.render('signup');
 });
 
@@ -131,10 +173,10 @@ router.get('/signup', (req, res) => {
 
 // renders login page
 router.get('/login', (req, res) => {
-    if (req.session.loggedIn) {
-        res.redirect('/');
-        return;
-    }
+    // if (req.session.loggedIn) {
+    //     res.redirect('/');
+    //     return;
+    // }
     res.render('login');
 });
 
