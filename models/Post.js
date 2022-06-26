@@ -47,7 +47,7 @@ Post.init(
       type: DataTypes.STRING,
       allowNull: false
     },
-    Image: {
+    image: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
