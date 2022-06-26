@@ -40,3 +40,5 @@ async function viewComments(event) {
 };
 
 viewCommentButton.addEventListener('click', viewComments);
+
+// create the button to update the image

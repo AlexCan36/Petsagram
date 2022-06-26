@@ -21,41 +21,60 @@ router.post("/api/images", async (req, res) => {
   };
 
   try {
-    const dbPostData = await Post.create({
-      caption: req.body.caption,
-      image: uploadedImg,
-      userId: req.session.user_id
-    })
+    cloudinary.uploader.upload(
+      uploadedImg.tempFilePath,
+      options,
+      function (error, result) {
+        const imgUrl = result.url;
+        // save public_id into database and it can be used in delete route
+        const publicID = result.public_id;
+        console.log(imgUrl);
+
+        const dbPostData = Post.create({
+          caption: req.body.caption,
+          Image: imgUrl,
+          public_id: publicID,
+          user_id: req.session.user_id
+        })
+
+        res.json(result)
+      }
+    );
+
     console.log(dbPostData)
   }
   catch (err) {
     res.status(500).json(err);
   } 
-
-  cloudinary.uploader.upload(
-    uploadedImg.tempFilePath,
-    options,
-    function (error, result) {
-      const imgUrl = result.url;
-      // save public_id into database and it can be used in delete route
-      const publicID = result.public_id;
-      console.log(imgUrl);
-    }
-  );
-
-
   
 });
 
-router.delete("/api/images", (req, res) => {
-  cloudinary.v2.uploader.destroy(public_id, options, function (error, result) {
-    res.json(result);
+router.delete("/api/images", async (req, res) => {
+  const deleteImgRoute = await Post.findOne({
+    where: {
+      public_id: req.body.nameonfrontend
+    }
+  })
+  cloudinary.v2.uploader.destroy(deleteImgRoute.public_id, options, function (error, result) {
+ 
   });
+  // decide if we want to delete the whole post or just the img
+  // name req.body.nameonfrontend on frontend javascript
+  // fetch (send public_id to fetch)
+  Post.updateOne({
+    public_id: req.body.nameonfrontend
+  })
 });
 
 router.put("/api/images", (req, res) => {
+  const updateImgRoute = Post.findOne({
+    where: {
+      public_id: req.body.nameonfrontend
+    }
+  })
+
   // delete
-  cloudinary.v2.uploader.destroy(public_id, options, function (error, result) {
+  cloudinary.v2.uploader.destroy(updateImgRoute, options, function (error, result) {
     res.json(result);
   });
 
@@ -74,8 +93,18 @@ router.put("/api/images", (req, res) => {
     options,
     function (error, result) {
       const imgUrl = result.url;
-      // save public_id into database and it can be used in delete route
       const publicID = result.public_id;
+
+      Post.update({
+        public_id: publicID,
+        image: imgUrl
+      },
+      {
+        where: {
+          public_id: req.body.nameonfrontend
+        }
+      }
+      )
     }
   );
 });
