@@ -15,4 +15,6 @@ router.put('/', async (req,res) =>{})
 // delete pet img, caption, comment, likes
 router.delete('/', async (req,res) =>{})
 
+module.exports = router;
+
 
