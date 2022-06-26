@@ -9,16 +9,28 @@ cloudinary.config({
   secure: true,
 });
 
-router.post("/api/images", (req, res) => {
+router.post("/api/images", async (req, res) => {
   const uploadedImg = req.files.image;
   console.log(uploadedImg);
-  // req.body to save img to the post
+
   const options = {
     width: 150,
     height: 150,
     crop: "scale",
     folder: "petsagram",
   };
+
+  try {
+    const dbPostData = await Post.create({
+      caption: req.body.caption,
+      image: uploadedImg,
+      userId: req.session.user_id
+    })
+    console.log(dbPostData)
+  }
+  catch (err) {
+    res.status(500).json(err);
+  } 
 
   cloudinary.uploader.upload(
     uploadedImg.tempFilePath,
@@ -30,6 +42,9 @@ router.post("/api/images", (req, res) => {
       console.log(imgUrl);
     }
   );
+
+
+  
 });
 
 router.delete("/api/images", (req, res) => {
@@ -61,7 +76,6 @@ router.put("/api/images", (req, res) => {
       const imgUrl = result.url;
       // save public_id into database and it can be used in delete route
       const publicID = result.public_id;
-      console.log(imgUrl);
     }
   );
 });
