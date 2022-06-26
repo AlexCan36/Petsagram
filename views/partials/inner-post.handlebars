@@ -21,11 +21,10 @@ somewhere}} --}}
             <div class="post-caption">
                 <p class="post-caption">{{this.caption}}</p>
             </div>
-            {{#if req.session.user.id === this.user_id}}
-            {{/if}}
             <form class="comment-form">
                 <div>
-                    <input type="text" class="textbox" data={{this.id}} placeholder="Leave a comment here..." id="comment-box" />
+                    <input type="text" class="textbox" data={{this.id}} placeholder="Leave a comment here..."
+                        id="comment-box" />
                 </div>
                 <div class="comment-button">
                     <input class="button" type="submit" value="Comment"></input>
@@ -34,6 +33,13 @@ somewhere}} --}}
                     <input class="button" data={{this.id}} id="viewComment" value="View Comments"></input>
                 </nav>
             </form>
+        </div>
+        <div class="edit-post col">
+            {{#if req.session.user_id === this.user_id}}
+            <div class="edit-button">
+                <input class="button" id="edit" type="submit" value="Edit Post"></input>
+            </div>
+            {{/if}}
         </div>
     </div>
 </div>

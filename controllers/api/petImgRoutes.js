@@ -9,7 +9,12 @@ cloudinary.config({
   secure: true,
 });
 
-router.post("/api/images", (req, res) => {
+
+router.get("/", (req, res) => {
+
+});
+
+router.post("/", (req, res) => {
   const uploadedImg = req.files.image;
   console.log(uploadedImg);
   // req.body to save img to the post
@@ -32,13 +37,13 @@ router.post("/api/images", (req, res) => {
   );
 });
 
-router.delete("/api/images", (req, res) => {
+router.delete("/", (req, res) => {
   cloudinary.v2.uploader.destroy(public_id, options, function (error, result) {
     res.json(result);
   });
 });
 
-router.put("/api/images", (req, res) => {
+router.put("/", (req, res) => {
   // delete
   cloudinary.v2.uploader.destroy(public_id, options, function (error, result) {
     res.json(result);
