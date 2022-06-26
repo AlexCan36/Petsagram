@@ -46,7 +46,7 @@ const editButton = document.querySelector('#edit');
 
 async function editPost(event) {
   event.preventDefault();  
-  // load in the post in a new page and let you edit stuff?
+  //load a new page with just this post and an option to edit it. this page should have a new submit button that either brings the user back to their profile or back to the feed page when the post is submitted. It should have routes that allow a user to update information
 };
 
 editButton.addEventListener('click', editPost);
