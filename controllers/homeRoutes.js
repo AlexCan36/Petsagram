@@ -54,7 +54,7 @@ router.get('/feed', (req, res) => {
 
 
 // renders the profile
-router.get('/profile', (req, res) => {
+router.get('/profile', withAuth, (req, res) => {
     Post.findAll({
         where: {
             user_id: req.session.user_id
@@ -85,8 +85,7 @@ router.get('/profile', (req, res) => {
         // handlebars
         .then(dbPostData => {
             const posts = dbPostData.map(post => post.get({ plain: true }));
-
-            res.render('profile', withAuth, {
+            res.render('profile', {
                 posts,
                 loggedIn: req.session.loggedIn
             });
