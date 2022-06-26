@@ -34,49 +34,53 @@ router.post("/api/images", async (req, res) => {
           caption: req.body.caption,
           Image: imgUrl,
           public_id: publicID,
-          user_id: req.session.user_id
-        })
+          user_id: req.session.user_id,
+        });
 
-        res.json(result)
+        res.json(result);
       }
     );
 
-    console.log(dbPostData)
-  }
-  catch (err) {
+    console.log(dbPostData);
+  } catch (err) {
     res.status(500).json(err);
-  } 
-  
+  }
 });
 
 router.delete("/api/images", async (req, res) => {
   const deleteImgRoute = await Post.findOne({
     where: {
-      public_id: req.body.nameonfrontend
-    }
-  })
-  cloudinary.v2.uploader.destroy(deleteImgRoute.public_id, options, function (error, result) {
- 
+      public_id: req.body.nameonfrontend,
+    },
   });
+  cloudinary.v2.uploader.destroy(
+    deleteImgRoute.public_id,
+    options,
+    function (error, result) {}
+  );
   // decide if we want to delete the whole post or just the img
   // name req.body.nameonfrontend on frontend javascript
   // fetch (send public_id to fetch)
   Post.updateOne({
-    public_id: req.body.nameonfrontend
-  })
+    public_id: req.body.nameonfrontend,
+  });
 });
 
 router.put("/api/images", (req, res) => {
   const updateImgRoute = Post.findOne({
     where: {
-      public_id: req.body.nameonfrontend
-    }
-  })
+      public_id: req.body.nameonfrontend,
+    },
+  });
 
   // delete
-  cloudinary.v2.uploader.destroy(updateImgRoute, options, function (error, result) {
-    res.json(result);
-  });
+  cloudinary.v2.uploader.destroy(
+    updateImgRoute,
+    options,
+    function (error, result) {
+      res.json(result);
+    }
+  );
 
   // upload
   const uploadedImg = req.files.image;
@@ -95,16 +99,17 @@ router.put("/api/images", (req, res) => {
       const imgUrl = result.url;
       const publicID = result.public_id;
 
-      Post.update({
-        public_id: publicID,
-        image: imgUrl
-      },
-      {
-        where: {
-          public_id: req.body.nameonfrontend
+      Post.update(
+        {
+          public_id: publicID,
+          image: imgUrl,
+        },
+        {
+          where: {
+            public_id: req.body.nameonfrontend,
+          },
         }
-      }
-      )
+      );
     }
   );
 });
