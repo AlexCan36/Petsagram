@@ -17,7 +17,7 @@
 {{#if posts.length}}
 <section>
   <ol>
-    {{#each this.user.posts as |post|}}
+    {{#each posts as |post|}}
     <li>
       {{> inner-post post}}
     </li>
