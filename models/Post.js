@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../controllers/connection');
+const sequelize = require('../config/connection');
 // create our Post model
 class Post extends Model {
   static Like(body, models) {

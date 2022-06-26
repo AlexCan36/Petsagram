@@ -17,5 +17,6 @@ router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-// all handlebars pages
+
+// get all the data from database and send it to handlebars pages
 module.exports = router;
