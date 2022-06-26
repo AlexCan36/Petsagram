@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petsagram</title>
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/welcome.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 
 <body>
@@ -22,10 +24,10 @@
                 <ul>
                     {{#if loggedIn}}
                     <li>
-                        <a href="/profile"></a>
+                        <a href="/profile">Profile</a>
                     </li>
                     <li>
-                        <a href="/feed">feed</a>
+                        <a href="/feed">Feed</a>
                     </li>
                     <li>
                         <a href="/logout">Logout</a>
@@ -50,6 +52,7 @@
     </div>
     <script src="/javascript/login.js"></script>
     <script src="/javascript/signup.js"></script>
+    <script src="/javascript/post.js"></script>
 </body>
 
 </html>

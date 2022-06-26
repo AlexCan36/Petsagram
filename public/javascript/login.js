@@ -5,13 +5,15 @@ async function loginSubmit(event) {
 
     const username = document.querySelector('#username-login').value.trim();
     const password = document.querySelector('#password-login').value.trim();
+    const email = document.querySelector('#email-login').value.trim();
 
     if (username && password) {
         const response = await fetch('api/users/login', {
             method: 'post',
             body: JSON.stringify({
                 username,
-                password
+                email,
+                password,
             }),
             headers: { 'Content-Type': 'application/json' }
         });
@@ -26,5 +28,3 @@ async function loginSubmit(event) {
 };
 
 loginForm && loginForm.addEventListener('submit', loginSubmit);
-
-console.log(loginForm);
