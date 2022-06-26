@@ -127,6 +127,8 @@ router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
+// get all the data from database and send it to handlebars pages
+
 // renders login page
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
@@ -151,4 +153,5 @@ router.get('/newpost', withAuth, (req, res) => {
 });
 
 // all handlebars pages
+
 module.exports = router;

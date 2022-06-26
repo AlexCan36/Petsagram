@@ -1,20 +1,68 @@
-const  router  = require("express").Router();
-const {} = require('../../models');
+const router = require("express").Router();
+const cloudinary = require("cloudinary").v2;
+require("dotenv").config();
 
-// getting getting pet img from cloudinary
-router.get('/', async (req,res) =>{})
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+  secure: true,
+});
 
-// creating pet img
-router.post('/', async (req,res) =>{
-    // post id
-})
+router.post("/api/images", (req, res) => {
+  const uploadedImg = req.files.image;
+  console.log(uploadedImg);
+  // req.body to save img to the post
+  const options = {
+    width: 150,
+    height: 150,
+    crop: "scale",
+    folder: "petsagram",
+  };
 
-// updating pet img
-router.put('/', async (req,res) =>{})
+  cloudinary.uploader.upload(
+    uploadedImg.tempFilePath,
+    options,
+    function (error, result) {
+      const imgUrl = result.url;
+      // save public_id into database and it can be used in delete route
+      const publicID = result.public_id;
+      console.log(imgUrl);
+    }
+  );
+});
 
-// delete pet img, caption, comment, likes
-router.delete('/', async (req,res) =>{})
+router.delete("/api/images", (req, res) => {
+  cloudinary.v2.uploader.destroy(public_id, options, function (error, result) {
+    res.json(result);
+  });
+});
 
+router.put("/api/images", (req, res) => {
+  // delete
+  cloudinary.v2.uploader.destroy(public_id, options, function (error, result) {
+    res.json(result);
+  });
+
+  // upload
+  const uploadedImg = req.files.image;
+  console.log(uploadedImg);
+  const options = {
+    width: 150,
+    height: 150,
+    crop: "scale",
+    folder: "petsagram",
+  };
+
+  cloudinary.uploader.upload(
+    uploadedImg.tempFilePath,
+    options,
+    function (error, result) {
+      const imgUrl = result.url;
+      // save public_id into database and it can be used in delete route
+      const publicID = result.public_id;
+      console.log(imgUrl);
+    }
+  );
+});
 module.exports = router;
-
-
