@@ -1,9 +1,10 @@
 const  router  = require("express").Router();
 const {} = require('../../models');
+const withAuth = require('../../utils/auth');
 
 
 // Display all comments for a post
-router.get('/:id/comments',function(req,res){
+router.get('/:id/comments', function(req,res){
     Comment.findAll({
         where: {
             post_id: req.params.id

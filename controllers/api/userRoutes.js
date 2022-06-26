@@ -45,11 +45,7 @@ router.post('/login', async (req, res) => {
         .json({ message: 'Incorrect email or password. Please try again!' });
       return;
     }
-    // console.log(dbUserData.user.dataValues);
-
     req.session.save(() => {
-      // const userData = dbUserData.map((user) => user.get({ plain: true }));
-      // console.log(userData);
       req.session.loggedIn = true;
       res.render('./profile', {
         loggedIn: req.session.loggedIn

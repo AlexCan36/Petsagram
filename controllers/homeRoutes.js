@@ -2,7 +2,14 @@ const router = require('express').Router();
 const withAuth = require('../utils/auth');
 
 // FRONT END
-// Homepage route
+
+// This is the page that renders when a user first visits the site, or any time that they are not logged in
+router.get('/', (req, res) => {
+    res.render('welcome');
+});
+
+
+// renders the feed
 router.get('/feed', (req, res) => {
     Post.findAll({
         where: {
@@ -35,7 +42,7 @@ router.get('/feed', (req, res) => {
         .then(dbPostData => {
             const posts = dbPostData.map(post => post.get({ plain: true }));
 
-            res.render('homepage', {
+            res.render('homepage', withAuth, {
                 posts,
                 loggedIn: req.session.loggedIn
             });
@@ -44,11 +51,10 @@ router.get('/feed', (req, res) => {
             console.log(err);
             res.status(500).json(err);
         });
+    });
   
-router.get('/', (req, res) => {
-    // handlebars
-    res.render('welcome');
-});
+
+
 
 // router.get('/feed', (req, res) => {
 //     // handlebars
@@ -64,7 +70,7 @@ router.get('/', (req, res) => {
 //     res.render('feed', { posts: new Array(4).fill(post) });
 // });
 
-// Log in routes to handlebars
+// renders a single post
 router.get('/single-post', (req, res) => {
     Post.findOne({
         where: {
@@ -121,6 +127,15 @@ router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
+// renders login page
+router.get('/login', (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    res.render('login');
+});
+
 // profile route
 router.get('/profile', withAuth, (req, res) => {
     res.render('profile', {
@@ -129,8 +144,10 @@ router.get('/profile', withAuth, (req, res) => {
 });
 
 // new post route
-router.get('/newpost', (req, res) => {
-    res.render('newpost');
+router.get('/newpost', withAuth, (req, res) => {
+    res.render('newpost', {
+        loggedIn: req.session.loggedIn
+    });
 });
 
 // all handlebars pages
