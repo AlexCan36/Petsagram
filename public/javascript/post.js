@@ -1,8 +1,11 @@
 // Adding likes
-const addLikeButton = document.querySelector('#add-like');
+const addLikeButtons = document.getElementsByClassName('add-like');
 
 async function addLike(event) {
   event.preventDefault();
+
+  console.log("entered add like function successfully");
+
   const post_id = event.target.getAttribute('data');
   const response = await fetch('/api/post/like', {
     method: 'post',
@@ -18,22 +21,25 @@ async function addLike(event) {
   }
 };
 
-addLikeButton.addEventListener('click', addLike);
+for (let i = 0; i < addLikeButtons.length; i++) {
+  addLikeButtons[i].addEventListener('click', addLike);
+}
+
+
 
 
 // Viewing Comments
-const viewCommentButton = document.querySelector('#viewComment');
+const viewCommentButtons = document.getElementsByClassName('view-comment-form');
 
 async function viewComments(event) {
-  console.log("started function")
+
   event.preventDefault();
-  console.log(event.target);
+  console.log("enters view comment function successfully!")
   const response = await fetch(`/${event.target.getAttribute('data')}/comments`, {
     method: 'get',
     headers: { 'Content-Type': 'application/json' }
   });
   console.log(response)
-
   if (response.ok) {
     console.log('success!');
     // document.location.replace(`/${event.target.getAttribute('data')}/comments`)
@@ -42,7 +48,10 @@ async function viewComments(event) {
   }
 };
 
-viewCommentButton.addEventListener('click', viewComments);
+for (let i = 0; i < viewCommentButtons.length; i++) {
+  viewCommentButtons[i].addEventListener('submit', viewComments);
+}
+
 
 // Edit a Post
 const editButton = document.querySelector('#edit');

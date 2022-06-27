@@ -1,8 +1,6 @@
 // Clicking the new post button
 const newPostButton = document.querySelector('#new-post');
-console.log("sanity test")
 async function createNewPost(event) {
-  console.log("fired off")
   event.preventDefault();  
 
   const response = await fetch('/newpost', {

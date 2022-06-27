@@ -134,6 +134,7 @@ router.get('/:id/comments', function(req,res){
 
 // Make a new comment on a post
 router.post('/comment', async (req, res) => {
+  console.log("in route");
   try {
     const dbUserData = await Comment.create({
       comment_text: req.body.comment_text,
