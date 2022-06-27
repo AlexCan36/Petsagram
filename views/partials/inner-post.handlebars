@@ -34,12 +34,15 @@ somewhere}} --}}
                 </nav>
             </form>
         </div>
-        <div class="edit-post col">
-            {{#if req.session.user_id === this.user_id}}
+        {{!-- <div class="edit-post col">
+            {{#if req.session.user_id == this.user_id}}
             <div class="edit-button">
-                <input class="button" id="edit" type="submit" value="Edit Post"></input>
+                <input class="button" id="edit" data={{this.id}} type="submit" value="Edit Caption"></input>
+            </div>
+            <div class="delete-button">
+                <input class="button" id="delete" data={{this.id}} type="submit" value="Delete Post"></input>
             </div>
             {{/if}}
-        </div>
+        </div> --}}
     </div>
 </div>

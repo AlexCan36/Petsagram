@@ -1,17 +1,12 @@
-{{!-- profile pic --}}
-{{!-- <div class="profile-pic">
-<img src={{this.user.profilePicture}}>
-</div> --}}
-
 {{!-- username --}}
 <div class="profile-username">
-    <h1>{{this.username}}</h1>
+  <h1>{{req.session.username}}</h1>
 </div>
 
 {{!-- new post option --}}
 <div>
-      <input class="button new-post" type="submit" value="Create A New Post"></input>
-    </div>
+  <input class="button" id="new-post" type="submit" value="Create A New Post"></input>
+</div>
 
 {{!-- List of the user's posts --}}
 {{#if posts.length}}
@@ -20,6 +15,12 @@
     {{#each posts as |post|}}
     <li>
       {{> inner-post post}}
+      <div class="edit-button">
+        <input class="button" id="edit" data={{this.id}} type="submit" value="Edit Caption"></input>
+      </div>
+      <div class="delete-button">
+        <input class="button" id="delete" data={{this.id}} type="submit" value="Delete Post"></input>
+      </div>
     </li>
     {{/each}}
   </ol>

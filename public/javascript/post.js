@@ -2,41 +2,44 @@
 const addLikeButton = document.querySelector('#add-like');
 
 async function addLike(event) {
-  event.preventDefault();  
+  event.preventDefault();
   const post_id = event.target.getAttribute('data');
-    const response = await fetch('/api/post/like', {
-      method: 'post',
-      body: {
-        post_id
-      },
-      headers: { 'Content-Type': 'application/json' }
-    });
+  const response = await fetch('/api/post/like', {
+    method: 'post',
+    body: {
+      post_id
+    },
+    headers: { 'Content-Type': 'application/json' }
+  });
   if (response.ok) {
-      console.log('success!');
-    } else {
-      alert(response.statusText);
-    }
+    console.log('success!');
+  } else {
+    alert(response.statusText);
+  }
 };
 
-addLikeButton.addEventListener('submit', addLike);
+addLikeButton.addEventListener('click', addLike);
 
 
 // Viewing Comments
 const viewCommentButton = document.querySelector('#viewComment');
 
 async function viewComments(event) {
-  event.preventDefault();  
+  console.log("started function")
+  event.preventDefault();
   console.log(event.target);
-    const response = await fetch(`/${event.target.getAttribute('data')}/comments`, {
-      method: 'get',
-      headers: { 'Content-Type': 'application/json' }
-    });
+  const response = await fetch(`/${event.target.getAttribute('data')}/comments`, {
+    method: 'get',
+    headers: { 'Content-Type': 'application/json' }
+  });
+  console.log(response)
 
   if (response.ok) {
-      console.log('success!');
-    } else {
-      alert(response.statusText);
-    }
+    console.log('success!');
+    // document.location.replace(`/${event.target.getAttribute('data')}/comments`)
+  } else {
+    alert(response.statusText);
+  }
 };
 
 viewCommentButton.addEventListener('click', viewComments);
@@ -45,8 +48,38 @@ viewCommentButton.addEventListener('click', viewComments);
 const editButton = document.querySelector('#edit');
 
 async function editPost(event) {
-  event.preventDefault();  
-  //load a new page with just this post and an option to edit it. this page should have a new submit button that either brings the user back to their profile or back to the feed page when the post is submitted. It should have routes that allow a user to update information
+  event.preventDefault();
+  let newCaption = prompt('What would you like the new caption to say?')
+  if (newCaption == null) {
+    newCaption = ""
+  }
+
+  const response = await fetch(`/${event.target.getAttribute('data')}/caption`, {
+    method: 'put',
+    headers: { 'Content-Type': 'application/json' }
+  });
+  if (response.ok) {
+    console.log('success!');
+  } else
+    alert(response.statusText);
 };
 
 editButton.addEventListener('click', editPost);
+
+
+// Delete a Post
+const deleteButton = document.querySelector('#delete');
+
+async function deletePost(event) {
+  event.preventDefault();
+
+  const response = await fetch(`/${event.target.getAttribute('data')}`, {
+    method: 'delete',
+  });
+  if (response.ok) {
+    console.log('Post was deleted');
+  } else
+    alert(response.statusText);
+};
+
+deleteButton.addEventListener('click', deletePost);
