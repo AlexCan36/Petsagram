@@ -13,7 +13,7 @@ somewhere}} --}}
                 <h3 class="post-user">Posted by: {{this.user}}</h3>
             </div>
             <div class="add">
-                <input class="button" data={{this.id}} id="add-like" type="submit" value="Like"></input>
+                <input class="button add-like" data={{this.id}} value="Like"></input>
             </div>
             <div class="post-counts">
                 {{this.like_count}} like(s) and {{this.comments_count}} comment(s)
@@ -29,17 +29,12 @@ somewhere}} --}}
                 <div class="comment-button">
                     <input class="button" type="submit" value="Comment"></input>
                 </div>
+            </form>
+            <form data={{this.id}} class="view-comment-form">
                 <nav class="view-comments">
-                    <input class="button" data={{this.id}} id="viewComment" value="View Comments"></input>
+                    <input class="button" type="submit" id="viewComment" value="View Comments"></input>
                 </nav>
             </form>
-        </div>
-        <div class="edit-post col">
-            {{#if req.session.user_id === this.user_id}}
-            <div class="edit-button">
-                <input class="button" id="edit" type="submit" value="Edit Post"></input>
-            </div>
-            {{/if}}
         </div>
     </div>
 </div>

@@ -41,3 +41,10 @@ app.use(routes);
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });
+
+
+// The "Post" button on the newpost page wont work. This is because the URL that we are saving the photo as isn't being recognized in the 'put' route that uses cloudinary
+
+// The view comments, make a comment, and add a like buttons are not working
+
+// I do not know if the delete or edit post buttons work because they cannot appear until the create new post part works correctly.
