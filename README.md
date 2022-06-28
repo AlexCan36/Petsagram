@@ -67,12 +67,12 @@ The following application allows the user to:
 
 | API used| 
 | ------------- |
-| [Google Book API](https://developers.google.com/books)|
+| []()|
 
 | Third Party Libraries|
 | ------------- |
 | [Boostrap](https://getbootstrap.com/) | 
-| [Topbar](https://buunguyen.github.io/topbar/)
+| [cloudinary]()
 
 ## Contributors
 * Alex Canez [LinkedIn]() | [GitHub]()
