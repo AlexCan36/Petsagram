@@ -95,6 +95,7 @@ router.delete("/", (req, res) => {
 
 router.put("/", (req, res) => {
   // delete
+  console.log(req.body)
 
 });
 

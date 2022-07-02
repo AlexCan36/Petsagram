@@ -15,12 +15,12 @@
     {{#each posts as |post|}}
     <li>
       {{> inner-post post}}
-      <form class="edit-button" action="po">
-        <input type="text"></input>
-        <input class="button" id="edit" data={{this.id}} type="submit" value="Edit Caption"></input>
+      <form class="edit-button" action="/api/post" method="put">
+        <input type="text" name="text"></input>
+        <input class="button" id={{this.id}} type="submit" value="Edit Caption"></input>
       </div>
       <div class="delete-button">
-        <input class="button" id="delete" data={{this.id}} type="submit" value="Delete Post"></input>
+        <input class="button" id={{this.id}} type="submit" value="Delete Post"></input>
       </form>
     </li>
     {{/each}}
