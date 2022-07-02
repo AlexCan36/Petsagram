@@ -2,11 +2,9 @@
 
 ## Description:
 
-As a pet owner I want to display my pets to the world and be able to show all my pictures of them. Here comes PETSAGRAM with the ability to show them theres also the need to be able to comment and like them.
+As a pet owner I want to display my pets to the world and be able to show all my pictures of them. Here comes PETSAGRAM with the ability to show them there's also the need to be able to comment and like them.
 
-As a user I want to be able to comment and like pictures of other users as well.
-
-Sign up and start posting.
+As a user, I want to be able to sign up and log in to create posts of my pets. I can also edit captions and delete post.
 
 Deployed Link:
 
@@ -61,9 +59,23 @@ The following application allows the user to:
 
 ## Gif Demo
 
-<img src="" width=900px>
+<img src="./public/assets/img/Petsagram.gif" width=900px>
+
+https://drive.google.com/file/d/1nZL3ewKJMBIiY_eOmbT-EsMb2Lrb44am/view
 
 ## Code Snippets
+
+Example of the Post model:
+<img src="./public/assets/img/post-model.png" width=600px>
+
+Example of the newPost handlebar:
+<img src="./public/assets/img/newPost-handlebars.png" width=600px>
+
+Example of the edit and delete routes:
+<img src="./public/assets/img/edit&delete-post-routes.png" width=600px>
+
+Example of the edit and delete button event listener
+<img src="./public/assets/img/edit&delete-button-eventlistener.png" width=600px>
 
 ## Credits
 

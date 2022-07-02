@@ -67,9 +67,6 @@ async function editPost(event) {
     alert(response.statusText);
 };
 
-editButton.addEventListener('click', editPost);
-
-
 // Delete a Post
 const deleteButton = document.querySelector('#delete');
 
