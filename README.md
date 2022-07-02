@@ -65,16 +65,20 @@ https://drive.google.com/file/d/1nZL3ewKJMBIiY_eOmbT-EsMb2Lrb44am/view
 
 ## Code Snippets
 
-Example of the Post model:
+Example of the Post model
+
 <img src="./public/assets/img/post-model.png" width=600px>
 
-Example of the newPost handlebar:
+Example of the newPost handlebar
+
 <img src="./public/assets/img/newPost-handlebars.png" width=600px>
 
-Example of the edit and delete routes:
+Example of the edit and delete routes
+
 <img src="./public/assets/img/edit&delete-post-routes.png" width=600px>
 
 Example of the edit and delete button event listener
+
 <img src="./public/assets/img/edit&delete-button-eventlistener.png" width=600px>
 
 ## Credits
