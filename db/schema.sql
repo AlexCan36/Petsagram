@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS petsfeed_db;
+
+CREATE DATABASE petsfeed_db;

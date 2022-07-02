@@ -1,0 +1,17 @@
+<form class="new-post-form" id="awesome-post-form" action="/api/post" method="post" enctype="multipart/form-data">
+  <div>
+    <label for="url-new-post">Add Photo Here:</label>
+    <input type="file" id="img-new-post" name="images"/>
+    <img id="myImg">
+  </div>
+  <div>
+    <label for="caption-new-post">Caption:</label>
+    <input type="text" class="textbox" id="caption-new-post" name="post" />
+  </div>
+
+  <div>
+    <input class="button" type="submit" id="post-button" value="Post"></input>
+  </div>
+</form>
+
+<script src="/javascript/newpost.js"></script>

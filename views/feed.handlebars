@@ -1,0 +1,14 @@
+{{!-- If there are posts already made, then it displays those posts --}}
+{{#if posts.length}}
+<section>
+  <ol>
+    {{#each posts as |post|}}
+    <li>
+      {{> inner-post post}}
+    </li>
+    {{/each}}
+  </ol>
+</section>
+{{else}}
+<h1>No Posts Yet!</h1>
+{{/if}}

@@ -1,0 +1,47 @@
+.container {
+    background-color: rgb(198, 214, 198);
+    color: rgb(41, 49, 41);
+    padding: 10px;
+}
+
+.textbox {
+    width: 40%;
+    height: 35px;
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(41, 49, 41);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.button {
+    background-color: rgb(41, 49, 41);
+    border: solid;
+    border-color: rgb(198, 214, 198);
+    border-radius: 15px;
+    color: rgb(198, 214, 198);
+    padding: 6px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.button:hover {
+    background-color: rgb(60, 72, 60)
+}
+
+.button:active {
+    background-color: rgb(41, 49, 41);
+}
+
+.post-image img{
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(41, 49, 41);
+    border-width: 3px;
+}
+
+.comment-button {
+    margin-bottom: 5px;
+}
