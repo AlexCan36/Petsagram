@@ -13,7 +13,6 @@ router.get('/', (req, res) => {
 
 // renders the feed
 router.get('/feed', withAuth, (req, res) => {
-    if (Post.count == 0) { console.log("Yo fool there are no posts"); } else {
         Post.findAll({
             attributes: [
                 'id',
@@ -51,7 +50,6 @@ router.get('/feed', withAuth, (req, res) => {
                 console.log(err);
                 res.status(500).json(err);
             });
-    }
 });
 
 
@@ -59,7 +57,6 @@ router.get('/feed', withAuth, (req, res) => {
 router.get('/profile', withAuth, async (req, res) => {
 console.log("/profile")
 console.log(req.session.user_id)
-    // if (Post.count == 0) {console.log("Yo fool there are no posts"); } else {
     Post.findAll({
         where: {
             user_id: req.session.user_id
@@ -100,7 +97,7 @@ console.log(req.session.user_id)
             console.log(err);
             res.status(500).json(err);
         });
-    // }
+
 });
 
 

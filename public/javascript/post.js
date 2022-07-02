@@ -6,12 +6,8 @@ async function addLike(event) {
 
   console.log("entered add like function successfully");
 
-  const post_id = event.target.getAttribute('data');
-  const response = await fetch('/api/post/like', {
+  const response = await fetch(`/api/post/like/${event.target.getAttribute('data')}`, {
     method: 'post',
-    body: {
-      post_id
-    },
     headers: { 'Content-Type': 'application/json' }
   });
   if (response.ok) {
@@ -24,9 +20,6 @@ async function addLike(event) {
 for (let i = 0; i < addLikeButtons.length; i++) {
   addLikeButtons[i].addEventListener('click', addLike);
 }
-
-
-
 
 // Viewing Comments
 const viewCommentButtons = document.getElementsByClassName('view-comment-form');
