@@ -94,3 +94,5 @@ async function deletePost(event) {
 
 editButton.addEventListener('click', editPost);
 deleteButton.addEventListener('click', deletePost);
+
+

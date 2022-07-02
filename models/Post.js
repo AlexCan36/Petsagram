@@ -63,6 +63,7 @@ Post.init(
     },
     public_id: {
       type: DataTypes.STRING,
+      allowNull: true,
     }
   },
   {

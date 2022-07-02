@@ -14,7 +14,8 @@ cloudinary.config({
 // Creates a new post
 router.post("/", async (req, res) => {
   console.log('AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHKLKFGLDFKGDFGLDFKGADFG')
-  const uploadedImg = req.body.picture;
+  const uploadedImg = req.files.images.tempFilePath;
+  const postText = req.body.post;
   // console.log(uploadedImg)
 console.log(req)
 
@@ -27,6 +28,20 @@ console.log(req)
   };
   console.log("options are good to go")
 
+
+  try {
+    const cloudURL = await cloudinary.uploader.upload(uploadedImg, options);
+    console.log(cloudURL);
+    const dbPostData = await Post.create({
+      caption: postText,
+      image: cloudURL.url,
+      user_id: req.session.user_id
+    })
+    console.log(dbPostData);
+    res.redirect("/profile");
+} catch (error) {
+    res.json(error);
+}
   // try {
   //   console.log("Do I dare tempt the db")
   //   const dbPostData = await Post.create({
@@ -80,29 +95,7 @@ router.delete("/", (req, res) => {
 
 router.put("/", (req, res) => {
   // delete
-  cloudinary.v2.uploader.destroy(public_id, options, function (error, result) {
-    res.json(result);
-  });
 
-  // upload
-  const uploadedImg = req.files.image;
-  console.log(uploadedImg);
-  const options = {
-    width: 150,
-    height: 150,
-    crop: "scale",
-    folder: "petsagram",
-  };
-
-  cloudinary.uploader.upload(
-    uploadedImg.tempFilePath,
-    options,
-    function (error, result) {
-      const imgUrl = result.url;
-      // save public_id into database and it can be used in delete route
-      const publicID = result.public_id;
-    }
-  );
 });
 
 // Display all comments for a post
