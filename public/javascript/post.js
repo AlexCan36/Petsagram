@@ -6,12 +6,8 @@ async function addLike(event) {
 
   console.log("entered add like function successfully");
 
-  const post_id = event.target.getAttribute('data');
-  const response = await fetch('/api/post/like', {
+  const response = await fetch(`/api/post/like/${event.target.getAttribute('data')}`, {
     method: 'post',
-    body: {
-      post_id
-    },
     headers: { 'Content-Type': 'application/json' }
   });
   if (response.ok) {
@@ -24,9 +20,6 @@ async function addLike(event) {
 for (let i = 0; i < addLikeButtons.length; i++) {
   addLikeButtons[i].addEventListener('click', addLike);
 }
-
-
-
 
 // Viewing Comments
 const viewCommentButtons = document.getElementsByClassName('view-comment-form');
@@ -51,44 +44,3 @@ async function viewComments(event) {
 for (let i = 0; i < viewCommentButtons.length; i++) {
   viewCommentButtons[i].addEventListener('submit', viewComments);
 }
-
-
-// Edit a Post
-const editButton = document.querySelector('#edit');
-
-async function editPost(event) {
-  event.preventDefault();
-  let newCaption = prompt('What would you like the new caption to say?')
-  if (newCaption == null) {
-    newCaption = ""
-  }
-
-  const response = await fetch(`/${event.target.getAttribute('data')}/caption`, {
-    method: 'put',
-    headers: { 'Content-Type': 'application/json' }
-  });
-  if (response.ok) {
-    console.log('success!');
-  } else
-    alert(response.statusText);
-};
-
-editButton.addEventListener('click', editPost);
-
-
-// Delete a Post
-const deleteButton = document.querySelector('#delete');
-
-async function deletePost(event) {
-  event.preventDefault();
-
-  const response = await fetch(`/${event.target.getAttribute('data')}`, {
-    method: 'delete',
-  });
-  if (response.ok) {
-    console.log('Post was deleted');
-  } else
-    alert(response.statusText);
-};
-
-deleteButton.addEventListener('click', deletePost);

@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
-const { Post } = require('../../models');
+const { Post, Like, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 cloudinary.config({
@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
   catch (err) {
     console.log(err)
     res.status(500).json(err);
-  } 
+  }
   console.log("glad we made it through that")
 
   function upload(localImgPath) {
@@ -55,81 +55,87 @@ router.post("/", async (req, res) => {
         console.log(error);
         console.log("XXXXXXXXXXXXXXXXXXX")
         console.log(result)
-        if (result.url){
+        if (result.url) {
           imgUrl = result.url;
-        }else{console.log("oh no")}
-        
+        } else { console.log("oh no") }
+
         // save public_id into database and it can be used in delete route
         const publicID = result.public_id;
         console.log(imgUrl);
-        
+
       }
-  );
-  return imgUrl;
+    );
+    return imgUrl;
   }
 });
 
+
 // Deletes a Post
-router.delete("/", (req, res) => {
-  cloudinary.v2.uploader.destroy(public_id, options, function (error, result) {
-    res.json(result);
-  });
+router.delete("/id", (req, res) => {
+  Post.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(dbPostData => {
+      if (!dbPostData) {
+        res.status(404).json({ message: 'No post found with this id' });
+        return;
+      }
+      res.json(dbPostData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
-router.put("/", (req, res) => {
-  // delete
-  cloudinary.v2.uploader.destroy(public_id, options, function (error, result) {
-    res.json(result);
+
+// edit a post
+router.put("/id/caption", (req, res) => {
+  Post.update({
+    post_id: req.params.id,
+    caption: req.body.newCaption
+  }).then(dbPostData => {
+    if (!dbPostData) {
+      res.status(404).json({ message: 'No post found with this id' });
+      return;
+    }
+    res.json(dbPostData);
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json(err);
   });
 
-  // upload
-  const uploadedImg = req.files.image;
-  console.log(uploadedImg);
-  const options = {
-    width: 150,
-    height: 150,
-    crop: "scale",
-    folder: "petsagram",
-  };
-
-  cloudinary.uploader.upload(
-    uploadedImg.tempFilePath,
-    options,
-    function (error, result) {
-      const imgUrl = result.url;
-      // save public_id into database and it can be used in delete route
-      const publicID = result.public_id;
-    }
-  );
 });
 
 // Display all comments for a post
-router.get('/:id/comments', function(req,res){
+router.get('/:id/comments', function (req, res) {
   Comment.findAll({
-      where: {
-          post_id: req.params.id
-      },
-      attributes: [
-          'id',
-          'comment_text',
-          'user_id',
-          'post_id',
-        ],
-      include:
-          {
-            model: User,
-            attributes: ['id', 'username'],
-            },
-          },
-      ).then (dbCommentData => {
-          const comments = dbCommentData.map(comment => comment.get({ plain: true }));
-          res.render('comments', { comments, loggedIn: req.session.loggedIn });
-        })
-        .catch(err => {
-          console.log(err);
-          res.status(500).json(err);
-        });
-      });
+    where: {
+      post_id: req.params.id
+    },
+    attributes: [
+      'id',
+      'comment_text',
+      'user_id',
+      'post_id',
+    ],
+    include:
+    {
+      model: User,
+      attributes: ['id', 'username'],
+    },
+  },
+  ).then(dbCommentData => {
+    const comments = dbCommentData.map(comment => comment.get({ plain: true }));
+    res.render('comments', { comments, loggedIn: req.session.loggedIn });
+  })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
 
 // Make a new comment on a post
@@ -154,17 +160,23 @@ router.post('/comment', async (req, res) => {
 });
 
 // Add a like to a post
-router.post('/like', async (req, res) => {
+router.post('/like/:id', async (req, res) => {
+
+  console.log(req.params.id);
+  console.log(req.session.user_id);
   try {
     const dbUserData = await Like.create({
-      post_id: req.body.post_id
+      post_id: req.params.id,
+      user_id: req.session.user_id
     });
 
-    req.session.save(() => {
-      req.session.loggedIn = true;
+    console.log(dbUserData);
+
+    // req.session.save(() => {
+    //   req.session.loggedIn = true;
 
       res.status(200).json(dbUserData);
-    });
+    // });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
