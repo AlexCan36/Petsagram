@@ -42,48 +42,6 @@ console.log(req)
 } catch (error) {
     res.json(error);
 }
-  // try {
-  //   console.log("Do I dare tempt the db")
-  //   const dbPostData = await Post.create({
-  //     caption: req.body.caption,
-  //     image: upload(uploadedImg),
-  //     userId: req.session.user_id
-  //   })
-  //   console.log(dbPostData)
-  //   console.log("db has been thouroghly tempted")
-  // }
-  // catch (err) {
-  //   console.log(err)
-  //   res.status(500).json(err);
-  // } 
-  // console.log("glad we made it through that")
-
-  // function upload(localImgPath) {
-  //   console.log("uploading images disgusting")
-  //   console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
-  //   console.log(`our wonderful path ${localImgPath}`)
-  //   let imgUrl;
-  //   localImgPath = "C:\Users\Tess\Pictures\Screenshots\Screenshot (8).png"
-  //   cloudinary.uploader.upload(
-  //     localImgPath,
-  //     options,
-  //     function (error, result) {
-  //       console.log("XXXXXXXXXXXXXXXXXXX")
-  //       console.log(error);
-  //       console.log("XXXXXXXXXXXXXXXXXXX")
-  //       console.log(result)
-  //       if (result.url){
-  //         imgUrl = result.url;
-  //       }else{console.log("oh no")}
-        
-  //       // save public_id into database and it can be used in delete route
-  //       const publicID = result.public_id;
-  //       console.log(imgUrl);
-        
-  //     }
-  // );
-  // return imgUrl;
-  // }
 });
 
 
@@ -194,11 +152,7 @@ router.post('/like/:id', async (req, res) => {
 
     console.log(dbUserData);
 
-    // req.session.save(() => {
-    //   req.session.loggedIn = true;
-
       res.status(200).json(dbUserData);
-    // });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
