@@ -28,7 +28,7 @@ async function editPost(event) {
     newCaption = ""
   }
 
-  const response = await fetch(`/${event.target.getAttribute('data')}/caption`, {
+  const response = await fetch(`/api/post/${event.target.getAttribute('data')}`, {
     method: 'put',
     body: JSON.stringify({
       newCaption,
@@ -36,6 +36,7 @@ async function editPost(event) {
     headers: { 'Content-Type': 'application/json' }
   });
   if (response.ok) {
+    location.reload()
     console.log('success!');
   } else
     alert(response.statusText);
@@ -52,10 +53,11 @@ const deleteButtons = document.getElementsByClassName('delete');
 async function deletePost(event) {
   event.preventDefault();
 
-  const response = await fetch(`/${event.target.getAttribute('data')}`, {
+  const response = await fetch(`/api/post/${event.target.getAttribute('data')}`, {
     method: 'delete',
   });
   if (response.ok) {
+    location.reload()
     console.log('Post was deleted');
   } else
     alert(response.statusText);

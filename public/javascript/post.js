@@ -44,3 +44,48 @@ async function viewComments(event) {
 for (let i = 0; i < viewCommentButtons.length; i++) {
   viewCommentButtons[i].addEventListener('submit', viewComments);
 }
+
+
+
+// Edit a Post
+const editButton = document.querySelector('#edit');
+
+async function editPost(event) {
+  event.preventDefault();
+  let newCaption = prompt('What would you like the new caption to say?')
+  if (newCaption == null) {
+    newCaption = ""
+  }
+
+  const response = await fetch(`/${event.target.getAttribute('data')}/caption`, {
+    method: 'put',
+    headers: { 'Content-Type': 'application/json' }
+  });
+  if (response.ok) {
+    console.log('success!');
+  } else
+    alert(response.statusText);
+};
+
+editButton.addEventListener('click', editPost);
+
+
+// Delete a Post
+const deleteButton = document.querySelector('#delete');
+
+async function deletePost(event) {
+  event.preventDefault();
+
+  const response = await fetch(`/${event.target.getAttribute('data')}`, {
+    method: 'delete',
+  });
+  if (response.ok) {
+    console.log('Post was deleted');
+  } else
+    alert(response.statusText);
+};
+
+editButton.addEventListener('click', editPost);
+deleteButton.addEventListener('click', deletePost);
+
+

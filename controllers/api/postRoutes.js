@@ -14,8 +14,11 @@ cloudinary.config({
 // Creates a new post
 router.post("/", async (req, res) => {
   console.log('AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHKLKFGLDFKGDFGLDFKGADFG')
-  const uploadedImg = req.body.picture;
-  console.log("I really love images")
+  const uploadedImg = req.files.images.tempFilePath;
+  const postText = req.body.post;
+  // console.log(uploadedImg)
+console.log(req)
+
 
   const options = {
     width: 150,
@@ -25,53 +28,68 @@ router.post("/", async (req, res) => {
   };
   console.log("options are good to go")
 
+
   try {
-    console.log("Do I dare tempt the db")
+    const cloudURL = await cloudinary.uploader.upload(uploadedImg, options);
+    console.log(cloudURL);
     const dbPostData = await Post.create({
-      caption: req.body.caption,
-      image: upload(uploadedImg),
-      userId: req.session.user_id
+      caption: postText,
+      image: cloudURL.url,
+      user_id: req.session.user_id
     })
-    console.log(dbPostData)
-    console.log("db has been thouroghly tempted")
-  }
-  catch (err) {
-    console.log(err)
-    res.status(500).json(err);
-  }
-  console.log("glad we made it through that")
+    console.log(dbPostData);
+    res.redirect("/profile");
+} catch (error) {
+    res.json(error);
+}
+  // try {
+  //   console.log("Do I dare tempt the db")
+  //   const dbPostData = await Post.create({
+  //     caption: req.body.caption,
+  //     image: upload(uploadedImg),
+  //     userId: req.session.user_id
+  //   })
+  //   console.log(dbPostData)
+  //   console.log("db has been thouroghly tempted")
+  // }
+  // catch (err) {
+  //   console.log(err)
+  //   res.status(500).json(err);
+  // } 
+  // console.log("glad we made it through that")
 
-  function upload(localImgPath) {
-    console.log("uploading images disgusting")
-    console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
-    console.log(`our wonderful path ${localImgPath}`)
-    let imgUrl;
-    localImgPath = "C:\Users\Tess\Pictures\Screenshots\Screenshot (8).png"
-    cloudinary.uploader.upload(
-      localImgPath,
-      options,
-      function (error, result) {
-        console.log("XXXXXXXXXXXXXXXXXXX")
-        console.log(error);
-        console.log("XXXXXXXXXXXXXXXXXXX")
-        console.log(result)
-        if (result.url) {
-          imgUrl = result.url;
-        } else { console.log("oh no") }
-
-        // save public_id into database and it can be used in delete route
-        const publicID = result.public_id;
-        console.log(imgUrl);
-
-      }
-    );
-    return imgUrl;
-  }
+  // function upload(localImgPath) {
+  //   console.log("uploading images disgusting")
+  //   console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+  //   console.log(`our wonderful path ${localImgPath}`)
+  //   let imgUrl;
+  //   localImgPath = "C:\Users\Tess\Pictures\Screenshots\Screenshot (8).png"
+  //   cloudinary.uploader.upload(
+  //     localImgPath,
+  //     options,
+  //     function (error, result) {
+  //       console.log("XXXXXXXXXXXXXXXXXXX")
+  //       console.log(error);
+  //       console.log("XXXXXXXXXXXXXXXXXXX")
+  //       console.log(result)
+  //       if (result.url){
+  //         imgUrl = result.url;
+  //       }else{console.log("oh no")}
+        
+  //       // save public_id into database and it can be used in delete route
+  //       const publicID = result.public_id;
+  //       console.log(imgUrl);
+        
+  //     }
+  // );
+  // return imgUrl;
+  // }
 });
 
 
 // Deletes a Post
-router.delete("/id", (req, res) => {
+router.delete("/:id", (req, res) => {
+  console.log(req.params.id)
   Post.destroy({
     where: {
       id: req.params.id
@@ -92,11 +110,15 @@ router.delete("/id", (req, res) => {
 
 
 // edit a post
-router.put("/id/caption", (req, res) => {
-  Post.update({
-    post_id: req.params.id,
+router.put("/:id", (req, res) => {
+  console.log(req.body)
+  Post.update(
+
+    {
     caption: req.body.newCaption
-  }).then(dbPostData => {
+  },    
+  {where: {id: req.params.id}}
+  ).then(dbPostData => {
     if (!dbPostData) {
       res.status(404).json({ message: 'No post found with this id' });
       return;
