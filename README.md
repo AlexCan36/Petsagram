@@ -6,7 +6,8 @@ As a pet owner I want to display my pets to the world and be able to show all my
 
 As a user, I want to be able to sign up and log in to create posts of my pets. I can also edit captions and delete post.
 
-Deployed Link:
+Deployed Link
+https://petsagram-project2.herokuapp.com/
 
 
 ## Table of Contents
