@@ -2,9 +2,13 @@
 
 ## Description:
 
-As a pet owner I want to display my pets to the world and be able to show all my pictures of them. Here comes PETSAGRAM with the ability to show them there's also the need to be able to comment and like them.
+As a pet owner i want to display my pets to the world and be able to show all my pictures of them. 
 
-As a user, I want to be able to sign up and log in to create posts of my pets. I can also edit captions and delete post.
+Here comes PETSAGRAM with the ability to show them theres also the need to be able to comment and like them.
+
+As a user i want to be able to comment and like pictures of other users as well.
+
+Sign up and start posting.
 
 Deployed Link:
 https://petsagram-project2.herokuapp.com/
